@@ -1,4 +1,6 @@
 import React from 'react';
+import { range } from 'lodash';
+import { InfoScreen } from './components/InfoPanel';
 import { Point } from './components/Point';
 import { PointRow } from './components/PointRow';
 import { gameScreen, keyCodes, directions, gameInitialState, levelsCount, levels } from './consts';
@@ -6,20 +8,6 @@ import { isBallAtPoint, getBallMovementResult, doesBallTouchGround, resetBallPos
 import { isRacketAtPoint, moveRacket } from './utils/racket';
 import { isScoreAtPoint, isLevelCompleted, checkAndSetHiScore } from './utils/score';
 import "./App.css";
-import { InfoScreen } from './components/InfoPanel';
-
-const rows = [];
-const cols = [];
-
-for (let i = 0; i < gameScreen.height; i++) {
-    rows.push(i);
-}
-
-for (let i = 0; i < gameScreen.width; i++) {
-    cols.push(i);
-}
-
-
 
 class App extends React.Component {
     state = {
@@ -112,9 +100,9 @@ class App extends React.Component {
         return (
             <div className="App">
                 <div className="game-screen">
-                    {rows.map(row => (
+                    {range(gameScreen.height).map((_, row) => (
                         <PointRow key={row}>
-                            {cols.map(col => (
+                            {range(gameScreen.width).map((_, col) => (
                                 <Point
                                     key={col}
                                     filled={
