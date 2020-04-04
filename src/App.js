@@ -17,10 +17,6 @@ class App extends React.Component {
 
     ballMovingInterval = null;
 
-    setBallCoordinates (ballCoordinates) {
-        this.setState({ballCoordinates});
-    }
-
     goToTheNextLevel = () => {
         clearInterval(this.ballMovingInterval);
         this.ballMovingInterval = null;

@@ -26,67 +26,67 @@ const initialLivesCount = 4;
 const scoreSamples = [
     {
         y: {
+            3: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
             4: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
-            5: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
         }
     },
     {    
         y: {
-            4: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
-            5: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true } }, 
-            6: { x: { 3: true, 4: true, 5: true, 6: true } },
+            3: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
+            4: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true } }, 
+            5: { x: { 3: true, 4: true, 5: true, 6: true } },
         }
     },
     {
         y: {
-            4: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
-            5: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true } }, 
-            6: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
+            3: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
+            4: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true } }, 
+            5: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
         }
     },
     {
         y: {
-            4: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
-            5: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true } }, 
-            6: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
-            7: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true } }, 
+            3: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
+            4: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true } }, 
+            5: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
+            6: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true } }, 
         }
     },
     {
         y: {
-            4: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
-            5: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true } }, 
-            6: { x: { 3: true, 4: true, 5: true, 6: true } },
-            7: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true } }, 
-            8: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
+            3: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
+            4: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true } }, 
+            5: { x: { 3: true, 4: true, 5: true, 6: true } },
+            6: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true } }, 
+            7: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
         }
     },
     {
         y: {
-            4: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
-            5: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true } }, 
-            6: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
-            7: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true } }, 
-            8: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
+            3: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
+            4: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true } }, 
+            5: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
+            6: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true } }, 
+            7: { x: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true } },
         }
     },
 ]
 
 const racketPositionSamples = [
     [
-        { x: 3, y: 23 },
-        { x: 4, y: 23 },
-        { x: 5, y: 23 },
-        { x: 6, y: 23 },
+        { x: 3, y: 22 },
+        { x: 4, y: 22 },
+        { x: 5, y: 22 },
+        { x: 6, y: 22 },
     ],
     [
-        { x: 4, y: 23 },
-        { x: 5, y: 23 },
-        { x: 6, y: 23 },
+        { x: 4, y: 22 },
+        { x: 5, y: 22 },
+        { x: 6, y: 22 },
     ],
     [
-        { x: 4, y: 23 },
-        { x: 5, y: 23 },
+        { x: 4, y: 22 },
+        { x: 5, y: 22 },
     ],
 ];
 
