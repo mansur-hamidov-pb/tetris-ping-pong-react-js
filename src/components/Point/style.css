@@ -1,0 +1,23 @@
+.point {
+    background-color: #E0DAA2;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, .05);
+}
+.point::after {
+    position: absolute;
+    content: ' ';
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    left: 2px;
+    top: 2px;
+    background: rgba(0, 0, 0, .05)
+}
+.point--filled {
+    border-color: rgba(0, 0, 0, .75);
+}
+.point--filled::after {
+    background: rgba(0, 0, 0, .75);
+}

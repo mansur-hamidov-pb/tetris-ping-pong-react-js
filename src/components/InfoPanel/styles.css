@@ -1,0 +1,26 @@
+.info-screen {
+    position: relative;
+    border-left: 1px solid rgba(0, 0, 0, .75);
+}
+.info-block {
+    position: absolute;
+    right: 8px;
+    text-align: right;
+}
+.level {
+    top: 30px;
+}
+.lives {
+    font-size: 24px;
+    top: 186px;
+}
+.score {
+    top: 78px;
+}
+.hi-score {
+    top: 126px;
+}
+.value {
+    font-weight: bold;
+    font-size: 20px;
+}

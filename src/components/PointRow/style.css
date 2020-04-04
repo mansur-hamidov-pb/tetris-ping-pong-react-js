@@ -1,0 +1,6 @@
+.point-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: max-content;
+    margin: 0 auto;
+}
