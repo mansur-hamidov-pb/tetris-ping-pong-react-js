@@ -51,7 +51,7 @@ class Controls {
         if ('getGamepads' in navigator) {
             window.addEventListener('gamepadconnected', () => {
                 this.gamepadConnected = true;
-                this.gamepadTrackInterval = window.setInterval(this.trackGamepadButtonPress, 100);
+                this.gamepadTrackInterval = window.setInterval(this.trackGamepadButtonPress, 150);
             });
 
             window.addEventListener('gamepaddisconnected', () => {
@@ -114,8 +114,14 @@ class Controls {
                 const pressedButton = this.getGamepadButtonByIndex(index);
                 const eventToDispatch = this.getGameEventByGamepadButton(pressedButton);
 
-                if (eventToDispatch) {
+                if (eventToDispatch && pressedButton !== this.gamepadKeys.START) {
                     dispatchEvent(new CustomEvent(eventToDispatch));
+                }
+            }
+            if (button.touched) {
+                const touchedButton = this.getGamepadButtonByIndex(index);
+                if (touchedButton === this.gamepadKeys.START) {
+                    dispatchEvent(new CustomEvent(this.gameEvents.TOGGLE_PAUSE));
                 }
             }
         });
