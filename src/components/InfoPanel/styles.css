@@ -8,19 +8,20 @@
     text-align: right;
 }
 .level {
-    top: 30px;
+    top: 36px;
 }
 .lives {
-    font-size: 24px;
-    top: 186px;
+    top: 178px;
 }
 .score {
-    top: 78px;
+    top: 84px;
 }
 .hi-score {
-    top: 126px;
+    top: 132px;
 }
 .value {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 23px;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 0;
 }

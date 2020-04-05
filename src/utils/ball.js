@@ -1,6 +1,7 @@
 import { cloneDeep } from 'lodash';
 import { directions, gameScreen } from '../consts';
 import { getRacketVerticalPosition, getRacketHorizontalCoordinates } from './racket';
+import { clearScoredItems } from './score';
 
 export function isBallAtPoint (ballCoordinates, x, y) {
     const [,ballCurrentCoordinates] = ballCoordinates;
@@ -31,17 +32,6 @@ export function getNextCoordinates (ballCoordinates, direction) {
     }
 
     return [currentCoordinates, nextCoordinates];
-}
-
-export function clearScoredItems (scoreCoordinates, touchedScores) {
-    const newScoreCoordinates = cloneDeep(scoreCoordinates);
-
-    if (touchedScores.length) {
-        touchedScores.forEach(({ x, y }) => {
-            newScoreCoordinates.y[y].x[x] = false;
-        });
-    }
-    return newScoreCoordinates;
 }
 
 export function getScoringResult (ballCoordinates, ballMoveDirection, scoreCoordinates) {
@@ -118,21 +108,21 @@ export function getBallMoveDirection (ballCoordinates) {
 export function getWallTouchedSide (ballCoordinates) {
     const [,currentCoordinates] = ballCoordinates;
 
-    if (currentCoordinates.x === 0 && currentCoordinates.y === gameScreen.height - 1) {
+    if (currentCoordinates.x === 1 && currentCoordinates.y === gameScreen.height) {
         return directions.BOTTOM_LEFT;
-    } else if (currentCoordinates.x === gameScreen.width - 1 && currentCoordinates.y === gameScreen.height - 1) {
+    } else if (currentCoordinates.x === gameScreen.width && currentCoordinates.y === gameScreen.height) {
         return directions.BOTTOM_RIGHT;
-    } else if (currentCoordinates.x > 0 && currentCoordinates.y === gameScreen.height - 1) {
+    } else if (currentCoordinates.x > 1 && currentCoordinates.y === gameScreen.height) {
         return directions.BOTTOM;
-    } else if (currentCoordinates.x === 0 && currentCoordinates.y === 0 ) {
+    } else if (currentCoordinates.x === 1 && currentCoordinates.y === 1 ) {
         return directions.TOP_LEFT;
-    } else if (currentCoordinates.x === gameScreen.width - 1 && currentCoordinates.y === 0) {
+    } else if (currentCoordinates.x === gameScreen.width && currentCoordinates.y === 1) {
         return directions.TOP_RIGHT
-    } else if (currentCoordinates.x === 0 && currentCoordinates.y > 0) {
+    } else if (currentCoordinates.x === 1 && currentCoordinates.y > 1) {
         return directions.LEFT;
-    } else if (currentCoordinates.x === gameScreen.width - 1 && currentCoordinates.y > 0) {
+    } else if (currentCoordinates.x === gameScreen.width && currentCoordinates.y > 1) {
         return directions.RIGHT;
-    } else if (currentCoordinates.x > 0 && currentCoordinates.y === 0) {
+    } else if (currentCoordinates.x > 1 && currentCoordinates.y === 1) {
         return directions.TOP;
     } else {
         return null;
@@ -325,7 +315,7 @@ export function getRacketTouchingBallNextDirection (ballCoordinates, wallTouchSi
 
 export function resetBallPosition (racketCoordinates) {
     const ballPreviousCoordinates = {
-        x: racketCoordinates[1].x,
+        x: racketCoordinates[racketCoordinates.length - 2].x,
         y: getRacketVerticalPosition(racketCoordinates)
     };
 

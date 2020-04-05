@@ -35,12 +35,19 @@ export const InfoScreen = ({
             <div className="info-block level">
                 LEVEL <br/><span className="value">{level}</span>
             </div>
-            <div className="info-block lives">&hearts;{livesCount}</div>
             <div className="info-block score">
                 SCORE <br/><span className="value">{scored}</span>
             </div>
             <div className="info-block hi-score">
                 HI-SCORE <br/><span className="value">{getHiScore()}</span>
+            </div>
+            <div className="info-block lives">
+                LIVES <br />
+                <span className="value">
+                {range(livesCount).map(_ => (
+                    <React.Fragment key={_}>&hearts;</React.Fragment>
+                ))}
+                </span>
             </div>
         </div>
     )

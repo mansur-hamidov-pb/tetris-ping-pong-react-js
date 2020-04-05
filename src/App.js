@@ -80,7 +80,7 @@ class App extends React.Component {
                 }));
             } else if (event.keyCode === keyCodes.SPACE) {
                 if (this.state.paused) {
-                    this.ballMovingInterval = setInterval(this.handleBallMove, this.state.ballMovingInterval);
+                    this.ballMovingInterval = setInterval(this.handleBallMove, 10);
                 } else {
                     clearInterval(this.ballMovingInterval);
                 }
@@ -96,9 +96,9 @@ class App extends React.Component {
         return (
             <div className="App">
                 <div className="game-screen">
-                    {range(gameScreen.height).map((_, row) => (
+                    {range(1, gameScreen.height + 1).map((row) => (
                         <PointRow key={row}>
-                            {range(gameScreen.width).map((_, col) => (
+                            {range(1, gameScreen.width + 1).map((col) => (
                                 <Point
                                     key={col}
                                     filled={

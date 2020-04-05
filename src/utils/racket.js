@@ -21,14 +21,14 @@ export function moveRacket (direction, racketCoordinates) {
 
     if (direction === directions.LEFT) {
         const racketPlacementFromLeft = getRacketHorizontalCoordinates(racketCoordinates)[0];
-        if (racketPlacementFromLeft === 0) {
+        if (racketPlacementFromLeft === 1) {
             return racketCoordinates;
         } else {
             return [{x: racketPlacementFromLeft - 1, y: racketVerticalPlacement}, ...racketCoordinates].slice(0, sliceLength);
         }
     } else {
         const racketPlacementFromRight = getRacketHorizontalCoordinates(racketCoordinates)[racketCoordinates.length - 1];
-        if (racketPlacementFromRight === gameScreen.width - 1) {
+        if (racketPlacementFromRight === gameScreen.width) {
             return racketCoordinates;
         } else {
             return [...racketCoordinates, {x: racketPlacementFromRight + 1, y: racketVerticalPlacement}].slice(-sliceLength);
