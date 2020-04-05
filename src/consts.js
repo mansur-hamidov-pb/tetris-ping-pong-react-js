@@ -14,13 +14,6 @@ export const directions = {
     BOTTOM_RIGHT: 'bottom-right'
 }
 
-export const keyCodes = {
-    LEFT: 37,
-    RIGHT: 39,
-    SPACE: 32,
-    RESTART: 82
-}
-
 const initialLivesCount = 4;
 
 const scoreSamples = [

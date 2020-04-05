@@ -3,10 +3,11 @@ import { range } from 'lodash';
 import { InfoScreen } from './components/InfoPanel';
 import { Point } from './components/Point';
 import { PointRow } from './components/PointRow';
-import { gameScreen, keyCodes, directions, gameInitialState, levelsCount, levels } from './consts';
+import { gameScreen, directions, gameInitialState, levelsCount, levels } from './consts';
 import { isBallAtPoint, getBallMovementResult, doesBallTouchGround, resetBallPosition } from './utils/ball';
 import { isRacketAtPoint, moveRacket } from './utils/racket';
 import { isScoreAtPoint, isLevelCompleted, checkAndSetHiScore } from './utils/score';
+import controls from './utils/controls';
 import "./App.css";
 
 class App extends React.Component {
@@ -67,29 +68,35 @@ class App extends React.Component {
     };
 
     componentDidMount () {
-        window.onkeydown = (event) => {
-            if (event.keyCode === keyCodes.LEFT) {
-                if (this.state.paused) return;
-                this.setState(state => ({
-                    racketPosition: moveRacket(directions.LEFT, state.racketPosition)
-                }))
-            } else if (event.keyCode === keyCodes.RIGHT) {
-                if (this.state.paused) return;
-                this.setState(state => ({
-                    racketPosition: moveRacket(directions.RIGHT, state.racketPosition)
-                }));
-            } else if (event.keyCode === keyCodes.SPACE) {
-                if (this.state.paused) {
-                    this.ballMovingInterval = setInterval(this.handleBallMove, this.state.ballMovingInterval);
-                } else {
-                    clearInterval(this.ballMovingInterval);
-                }
-                this.setState({ paused: !this.state.paused });
+        controls.init();
+        const { gameEvents } = controls;
+
+        window.addEventListener(gameEvents.MOVE_RACKET_LEFT, () => {
+            if (this.state.paused) return;
+            this.setState(state => ({
+                racketPosition: moveRacket(directions.LEFT, state.racketPosition)
+            }));
+        });
+
+        window.addEventListener(gameEvents.MOVE_RACKET_RIGHT, () => {
+            if (this.state.paused) return;
+            this.setState(state => ({
+                racketPosition: moveRacket(directions.RIGHT, state.racketPosition)
+            }));
+        });
+
+        window.addEventListener(gameEvents.TOGGLE_PAUSE, () => {
+            if (this.state.paused) {
+                this.ballMovingInterval = setInterval(this.handleBallMove, this.state.ballMovingInterval);
+            } else {
+                clearInterval(this.ballMovingInterval);
             }
-            else if (event.keyCode === keyCodes.RESTART) {
-                this.restartGame(true);
-            }
-        }
+            this.setState({ paused: !this.state.paused });
+        });
+
+        window.addEventListener(gameEvents.RESTART_GAME, () => {
+            this.restartGame(true);
+        });
     }
 
     render () {
