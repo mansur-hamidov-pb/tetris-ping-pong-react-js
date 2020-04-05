@@ -1,8 +1,8 @@
 .point {
     background-color: #E0DAA2;
     position: relative;
-    width: 24px;
-    height: 24px;
+    width: 100%;
+    height: 100%;
     box-sizing: border-box;
     border: 2px solid rgba(0, 0, 0, .05);
 }

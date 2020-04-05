@@ -1,6 +1,7 @@
 .point-row {
     display: flex;
-    flex-wrap: wrap;
-    width: max-content;
+    box-sizing: border-box;
     margin: 0 auto;
+    height: calc(100vw / 15);
+    max-height: calc(480px / 15);
 }

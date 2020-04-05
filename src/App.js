@@ -98,7 +98,7 @@ class App extends React.Component {
                 <div className="game-screen">
                     {range(1, gameScreen.height + 1).map((row) => (
                         <PointRow key={row}>
-                            {range(1, gameScreen.width + 1).map((col) => (
+                            {range(1, gameScreen.width + 6).map((col) => (
                                 <Point
                                     key={col}
                                     filled={

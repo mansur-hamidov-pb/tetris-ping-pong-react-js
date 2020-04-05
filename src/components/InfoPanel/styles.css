@@ -1,5 +1,8 @@
 .info-screen {
-    position: relative;
+    position: absolute;
+    width: 33%;
+    right: 0;
+    height: 100vh;
     border-left: 1px solid rgba(0, 0, 0, .75);
 }
 .info-block {
