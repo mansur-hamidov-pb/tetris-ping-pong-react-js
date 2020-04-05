@@ -3,5 +3,5 @@
     box-sizing: border-box;
     margin: 0 auto;
     height: calc(100vw / 15);
-    max-height: calc(480px / 15);
+    max-height: calc(412px / 15);
 }
