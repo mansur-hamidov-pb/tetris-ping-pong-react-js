@@ -80,7 +80,7 @@ class App extends React.Component {
                 }));
             } else if (event.keyCode === keyCodes.SPACE) {
                 if (this.state.paused) {
-                    this.ballMovingInterval = setInterval(this.handleBallMove, state.ballMovingInterval);
+                    this.ballMovingInterval = setInterval(this.handleBallMove, this.state.ballMovingInterval);
                 } else {
                     clearInterval(this.ballMovingInterval);
                 }
