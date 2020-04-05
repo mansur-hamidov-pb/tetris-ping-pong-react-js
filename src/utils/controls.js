@@ -49,19 +49,20 @@ class Controls {
 
     initGamepad () {
         if ('getGamepads' in navigator) {
-            window.addEventListener('gamepadconnected', () => {
+            const { GAMEPAD_CONNECTED, GAMEPAD_DISCONNECTED} = this.gamepadEvents;
+            window.addEventListener(GAMEPAD_CONNECTED, () => {
                 this.gamepadConnected = true;
                 this.gamepadTrackInterval = window.setInterval(this.trackGamepadButtonPress, 150);
             });
 
-            window.addEventListener('gamepaddisconnected', () => {
+            window.addEventListener(GAMEPAD_DISCONNECTED, () => {
                 clearInterval(this.gamepadTrackInterval);
             });
 
             var checkGamepadConnected = window.setInterval(() => {
                 if (navigator.getGamepads()[0]) {
                     if(!this.gamepadConnected) {
-                        const event = new CustomEvent(this.gamepadEvents.GAMEPAD_CONNECTED);
+                        const event = new CustomEvent(GAMEPAD_CONNECTED);
                         window.dispatchEvent(event);
                     }
                     window.clearInterval(checkGamepadConnected);
