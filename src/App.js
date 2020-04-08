@@ -73,16 +73,13 @@ class App extends React.Component {
 
         window.addEventListener(gameEvents.MOVE_RACKET_LEFT, () => {
             if (this.state.paused) return;
-            this.setState(state => ({
-                racketPosition: moveRacket(directions.LEFT, state.racketPosition)
-            }));
+            this.setState(state => moveRacket(directions.LEFT, state.racketPosition, state.ballCoordinates));
+            // setTimeout(() => console.log(this.state.ballCoordinates));
         });
 
         window.addEventListener(gameEvents.MOVE_RACKET_RIGHT, () => {
             if (this.state.paused) return;
-            this.setState(state => ({
-                racketPosition: moveRacket(directions.RIGHT, state.racketPosition)
-            }));
+            this.setState(state => moveRacket(directions.RIGHT, state.racketPosition, state.ballCoordinates));
         });
 
         window.addEventListener(gameEvents.TOGGLE_PAUSE, () => {

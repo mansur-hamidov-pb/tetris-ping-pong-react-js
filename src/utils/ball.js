@@ -26,12 +26,37 @@ export function getNextCoordinates (ballCoordinates, direction) {
             nextCoordinates.y = currentCoordinates.y + 1;
             break;
         case directions.BOTTOM_RIGHT:
-        default:
             nextCoordinates.x = currentCoordinates.x + 1;
             nextCoordinates.y = currentCoordinates.y + 1;
+            break;
+        case directions.RIGHT:
+            nextCoordinates.x = currentCoordinates.x + 1;
+            nextCoordinates.y = currentCoordinates.y;
+            break;
+        case directions.LEFT:
+        default:
+            nextCoordinates.x = currentCoordinates.x - 1;
+            nextCoordinates.y = currentCoordinates.y;
     }
 
     return [currentCoordinates, nextCoordinates];
+}
+
+export function changeBallMoovingDirection (ballCoordinates, direction) {
+    const [,currentCoordinates] = cloneDeep(ballCoordinates);
+    const previousCoordinates = {};
+
+    if (direction === directions.TOP_RIGHT) {
+        previousCoordinates.x = currentCoordinates.x - 1;
+        previousCoordinates.y = currentCoordinates.y + 1;
+    } else if (direction === directions.TOP_LEFT) {
+        previousCoordinates.x = currentCoordinates.x + 1;
+        previousCoordinates.y = currentCoordinates.y + 1;
+    } else {
+        return ballCoordinates;
+    }
+
+    return [previousCoordinates, currentCoordinates];
 }
 
 export function getScoringResult (ballCoordinates, ballMoveDirection, scoreCoordinates) {
