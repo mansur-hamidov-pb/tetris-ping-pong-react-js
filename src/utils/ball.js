@@ -90,6 +90,7 @@ export function getBallMovementResult (ballCoordinates, racketCoordinates, score
     const ballMovementDirection = getBallMoveDirection(ballCoordinates);
     const wallTouchSide = getWallTouchedSide(ballCoordinates);
     const ballTouchesRacket = doesBallTochRacket(ballCoordinates, racketCoordinates);
+    const ballTouchesRacketCorner = doesBallTouchRacketCorner(ballCoordinates, racketCoordinates);
 
     if (ballTouchesRacket) {
         const nextDirection = getRacketTouchingBallNextDirection(ballCoordinates, wallTouchSide, ballMovementDirection);
@@ -97,6 +98,15 @@ export function getBallMovementResult (ballCoordinates, racketCoordinates, score
             ballCoordinates: getNextCoordinates(ballCoordinates, nextDirection),
             scores: scoreCoordinates
         }
+    } else if (ballTouchesRacketCorner) {
+        const nextDirection =
+            ballMovementDirection === directions.BOTTOM_LEFT 
+                ? directions.TOP_RIGHT
+                : directions.TOP_LEFT;
+        return {
+            ballCoordinates: getNextCoordinates(ballCoordinates, nextDirection),
+            scores: scoreCoordinates
+        };
     }
     let nextDirection = wallTouchSide ? getWallTouchingBallNextDirection(ballCoordinates, wallTouchSide, ballMovementDirection) : ballMovementDirection;
     const scoringResult = getScoringResult(ballCoordinates, nextDirection, scoreCoordinates);
@@ -175,6 +185,18 @@ export function doesBallTochRacket (ballCoordinates, racketCoordinates) {
     } else  {
         return getRacketHorizontalCoordinates(racketCoordinates).includes(currentCoordinates.x);
     }
+}
+
+export function doesBallTouchRacketCorner (ballCoordinates, racketCoordinates) {
+    const { BOTTOM_RIGHT, BOTTOM_LEFT } = directions;
+    const ballMovementDirection = getBallMoveDirection(ballCoordinates);
+    const racketRightCorner = racketCoordinates[racketCoordinates.length - 1];
+    const racketLeftCorner = racketCoordinates[0];
+    const [, currentCoordinates] = ballCoordinates;
+
+    const isBallOnLeftCorner = currentCoordinates.x === racketLeftCorner.x - 1 && currentCoordinates.y === racketLeftCorner.y - 1;
+    const isBallOnRightCorner = currentCoordinates.x === racketRightCorner.x + 1 && currentCoordinates.y === racketRightCorner.y - 1;
+    return (isBallOnLeftCorner && ballMovementDirection === BOTTOM_RIGHT) || (isBallOnRightCorner && ballMovementDirection === BOTTOM_LEFT);
 }
 
 export function getApproximateTouchedBallAndNextDirections (ballCoordinates, ballMoveDirection) {
