@@ -89,7 +89,7 @@ export function getScoringResult (ballCoordinates, ballMoveDirection, scoreCoord
 export function getBallMovementResult (ballCoordinates, racketCoordinates, scoreCoordinates) {
     const ballMovementDirection = getBallMoveDirection(ballCoordinates);
     const wallTouchSide = getWallTouchedSide(ballCoordinates);
-    const ballTouchesRacket = doesBallTochRacket(ballCoordinates, racketCoordinates);
+    const ballTouchesRacket = doesBallTouchRacket(ballCoordinates, racketCoordinates);
     const ballTouchesRacketCorner = doesBallTouchRacketCorner(ballCoordinates, racketCoordinates);
 
     if (ballTouchesRacket) {
@@ -171,7 +171,7 @@ export function doesBallTouchGround (ballCoordinates) {
     return groundTouchSides.includes(wallTouchSide);
 }
 
-export function doesBallTochRacket (ballCoordinates, racketCoordinates) {
+export function doesBallTouchRacket (ballCoordinates, racketCoordinates) {
     const [, currentCoordinates] = ballCoordinates;
     const racketVerticalPosition = getRacketVerticalPosition(racketCoordinates);
     const ballMoveDirection = getBallMoveDirection(ballCoordinates);

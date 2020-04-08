@@ -1,5 +1,5 @@
 import { directions, gameScreen } from '../consts';
-import { doesBallTochRacket, getNextCoordinates as getBallNextCoordinates, changeBallMoovingDirection } from './ball';
+import { doesBallTouchRacket, getNextCoordinates as getBallNextCoordinates, changeBallMoovingDirection } from './ball';
 
 export function isRacketAtPoint (racketCoordinates, x, y) {
     const isRacketAtThisRow = getRacketVerticalPosition(racketCoordinates) === y;
@@ -19,7 +19,7 @@ export function getRacketHorizontalCoordinates (racketCoordinates) {
 export function moveRacket (direction, racketCoordinates, ballCoordinates) {
     const sliceLength = racketCoordinates.length;
     const racketVerticalPlacement = getRacketVerticalPosition(racketCoordinates);
-    const ballTouchesRacket = doesBallTochRacket(ballCoordinates, racketCoordinates);
+    const ballTouchesRacket = doesBallTouchRacket(ballCoordinates, racketCoordinates);
     let nextBallCoordinates;
 
     if (direction === directions.LEFT) {
