@@ -99,7 +99,7 @@ class App extends React.Component {
     render () {
         return (
             <div className="App">
-                <div className="game-screen">
+                <div className="game-screen" id="gamescreen">
                     {range(1, gameScreen.height + 1).map((row) => (
                         <PointRow key={row}>
                             {range(1, gameScreen.width + 6).map((col) => (
@@ -120,6 +120,7 @@ class App extends React.Component {
                     level={this.state.level}
                     scored={this.state.scored}
                 />
+                <div id="touchbar" style={{height: '50px', width: '100%', background: "red"}}/>
             </div>
         );
     }

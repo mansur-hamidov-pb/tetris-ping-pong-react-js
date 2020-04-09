@@ -45,6 +45,7 @@ class Controls {
     init () {
         this.initGamepad();
         this.initKeyboard();
+        this.initSwipeEvents();
     }
 
     initGamepad () {
@@ -79,6 +80,42 @@ class Controls {
                 dispatchEvent(new CustomEvent(eventToDispatch));
             }
         };
+    }
+
+    initSwipeEvents () {
+        const gameScreenWidth = document.getElementById('gamescreen').offsetWidth;
+        const pointWidth = gameScreenWidth / 15;
+        const touchbar = document.getElementById('touchbar');
+        touchbar.onmousedown = e => {
+            let startX = e.clientX;
+            touchbar.onmousemove = e => {
+                if (e.clientX - startX >= pointWidth) {
+                    window.dispatchEvent(new CustomEvent(this.gameEvents.MOVE_RACKET_RIGHT));
+                    startX = e.clientX;
+                } else if (startX - e.clientX >= pointWidth) {
+                    window.dispatchEvent(new CustomEvent(this.gameEvents.MOVE_RACKET_LEFT));
+                    startX = e.clientX;
+                }
+            }
+        }
+        touchbar.onmouseup = () => touchbar.onmousemove = null;
+        touchbar.onmouseleave = () => touchbar.onmousemove = null;
+        touchbar.onclick = () => {
+            window.dispatchEvent(new CustomEvent(this.gameEvents.TOGGLE_PAUSE));
+        }
+        touchbar.ontouchstart = e => {
+            let startX = e.touches[0].clientX;
+            touchbar.ontouchmove = e => {
+                const clientX = e.touches[0].clientX;
+                if (clientX - startX >= pointWidth) {
+                    window.dispatchEvent(new CustomEvent(this.gameEvents.MOVE_RACKET_RIGHT));
+                    startX = clientX;
+                } else if (startX - clientX >= pointWidth) {
+                    window.dispatchEvent(new CustomEvent(this.gameEvents.MOVE_RACKET_LEFT));
+                    startX = clientX;
+                }
+            }
+        }
     }
 
     getGamepadButtonByIndex (index) {

@@ -6,7 +6,6 @@ body {
     color: rgba(0, 0, 0, .75);
 }
 .App {
-    display: flex;
     width: 100%;
     max-width: 412px;
     margin: 0 auto;
