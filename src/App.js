@@ -1,14 +1,13 @@
 import React from 'react';
-import { range } from 'lodash';
 import { InfoScreen } from './components/InfoPanel';
-import { Point } from './components/Point';
-import { PointRow } from './components/PointRow';
-import { gameScreen, directions, gameInitialState, levelsCount, levels } from './consts';
-import { isBallAtPoint, getBallMovementResult, doesBallTouchGround, resetBallPosition } from './utils/ball';
-import { isRacketAtPoint, moveRacket } from './utils/racket';
-import { isScoreAtPoint, isLevelCompleted, checkAndSetHiScore } from './utils/score';
+import { directions, gameInitialState, levelsCount, levels } from './consts';
+import { getBallMovementResult, doesBallTouchGround, resetBallPosition } from './utils/ball';
+import { moveRacket } from './utils/racket';
+import { isLevelCompleted, checkAndSetHiScore } from './utils/score';
 import controls from './utils/controls';
 import "./App.css";
+import { GameScreen } from './components/GameScreen';
+import { Ball } from './components/Ball';
 
 class App extends React.Component {
     state = {
@@ -97,23 +96,12 @@ class App extends React.Component {
     }
 
     render () {
+        const [, currentBallCoordinates] = this.state.ballCoordinates;
         return (
             <div className="App">
                 <div className="game-screen" id="gamescreen">
-                    {range(1, gameScreen.height + 1).map((row) => (
-                        <PointRow key={row}>
-                            {range(1, gameScreen.width + 6).map((col) => (
-                                <Point
-                                    key={col}
-                                    filled={
-                                        isRacketAtPoint(this.state.racketPosition, col, row) ||
-                                        isBallAtPoint(this.state.ballCoordinates, col, row) ||
-                                        isScoreAtPoint(this.state.scores, col, row)
-                                    }
-                                />
-                            ))}
-                        </PointRow>
-                    ))}
+                    <GameScreen scores={this.state.scores} />
+                    <Ball {...currentBallCoordinates} />
                 </div>
                 <InfoScreen
                     livesCount={this.state.livesCount}

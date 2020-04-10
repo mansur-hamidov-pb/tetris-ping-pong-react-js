@@ -13,4 +13,5 @@ body {
 }
 .game-screen {
     width: 100%;
+    position: relative;
 }
