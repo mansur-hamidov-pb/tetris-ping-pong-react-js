@@ -22,9 +22,9 @@ export const InfoScreen = ({
             <div className="info-block lives">
                 LIVES <br />
                 <span className="value">
-                {range(livesCount).map(_ => (
-                    <React.Fragment key={_}>&hearts;</React.Fragment>
-                ))}
+                    {range(livesCount).map(_ => (
+                        <React.Fragment key={_}>&hearts;</React.Fragment>
+                    ))}
                 </span>
             </div>
         </div>

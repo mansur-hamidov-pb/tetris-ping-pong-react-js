@@ -9,6 +9,7 @@ import { isRacketAtPoint, moveRacket } from './utils/racket';
 import { isScoreAtPoint, isLevelCompleted, checkAndSetHiScore } from './utils/score';
 import controls from './utils/controls';
 import "./App.css";
+import { Touchpad } from './components/Touchpad';
 
 class App extends React.Component {
     state = {
@@ -114,13 +115,13 @@ class App extends React.Component {
                             ))}
                         </PointRow>
                     ))}
+                    <InfoScreen
+                        livesCount={this.state.livesCount}
+                        level={this.state.level}
+                        scored={this.state.scored}
+                    />
                 </div>
-                <InfoScreen
-                    livesCount={this.state.livesCount}
-                    level={this.state.level}
-                    scored={this.state.scored}
-                />
-                <div id="touchbar" style={{height: '50px', width: '100%', background: "red"}}/>
+                <Touchpad />
             </div>
         );
     }
