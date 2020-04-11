@@ -3,7 +3,13 @@ body {
     margin: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 11px;
-    color: rgba(0, 0, 0, .75);
+    color: rgba(0, 0, 0, .75);  
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
 }
 .App {
     width: 100%;

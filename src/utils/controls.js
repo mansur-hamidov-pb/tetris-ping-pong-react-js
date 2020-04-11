@@ -145,9 +145,9 @@ class Controls {
     }
 
     trackGamepadButtonPress = () => {
-        const gp = navigator.getGamepads()[0];
+        const gamepad = navigator.getGamepads()[0];
 
-        gp.buttons.forEach((button, index) => {
+        gamepad.buttons.forEach((button, index) => {
             if (button.pressed) {
                 const pressedButton = this.getGamepadButtonByIndex(index);
                 const eventToDispatch = this.getGameEventByGamepadButton(pressedButton);

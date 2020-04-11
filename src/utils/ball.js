@@ -90,7 +90,6 @@ export function getBallMovementResult (ballCoordinates, racketCoordinates, score
     const ballMovementDirection = getBallMoveDirection(ballCoordinates);
     const wallTouchSide = getWallTouchedSide(ballCoordinates);
     const ballTouchesRacket = doesBallTouchRacket(ballCoordinates, racketCoordinates);
-    const ballTouchesRacketCorner = doesBallTouchRacketCorner(ballCoordinates, racketCoordinates);
 
     if (ballTouchesRacket) {
         const nextDirection = getRacketTouchingBallNextDirection(ballCoordinates, wallTouchSide, ballMovementDirection);
@@ -98,7 +97,10 @@ export function getBallMovementResult (ballCoordinates, racketCoordinates, score
             ballCoordinates: getNextCoordinates(ballCoordinates, nextDirection),
             scores: scoreCoordinates
         }
-    } else if (ballTouchesRacketCorner) {
+    }
+    let nextDirection = wallTouchSide ? getWallTouchingBallNextDirection(ballCoordinates, wallTouchSide, ballMovementDirection) : ballMovementDirection;
+    const ballTouchesRacketCorner = doesBallTouchRacketCorner(ballCoordinates, racketCoordinates, nextDirection);
+    if (ballTouchesRacketCorner) {
         const nextDirection =
             ballMovementDirection === directions.BOTTOM_LEFT 
                 ? directions.TOP_RIGHT
@@ -108,7 +110,6 @@ export function getBallMovementResult (ballCoordinates, racketCoordinates, score
             scores: scoreCoordinates
         };
     }
-    let nextDirection = wallTouchSide ? getWallTouchingBallNextDirection(ballCoordinates, wallTouchSide, ballMovementDirection) : ballMovementDirection;
     const scoringResult = getScoringResult(ballCoordinates, nextDirection, scoreCoordinates);
 
     return {
@@ -187,9 +188,8 @@ export function doesBallTouchRacket (ballCoordinates, racketCoordinates) {
     }
 }
 
-export function doesBallTouchRacketCorner (ballCoordinates, racketCoordinates) {
+export function doesBallTouchRacketCorner (ballCoordinates, racketCoordinates, ballMovementDirection) {
     const { BOTTOM_RIGHT, BOTTOM_LEFT } = directions;
-    const ballMovementDirection = getBallMoveDirection(ballCoordinates);
     const racketRightCorner = racketCoordinates[racketCoordinates.length - 1];
     const racketLeftCorner = racketCoordinates[0];
     const [, currentCoordinates] = ballCoordinates;
