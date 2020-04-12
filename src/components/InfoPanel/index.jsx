@@ -1,7 +1,9 @@
 import React from 'react';
 import { range } from 'lodash';
-import "./styles.css";
+
 import { getHiScore } from '../../utils/score';
+
+import "./styles.scss";
 
 export const InfoScreen = ({
     livesCount,

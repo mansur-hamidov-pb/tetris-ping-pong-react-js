@@ -1,3 +1,5 @@
+@import '../../assets/styles/variables.scss';
+
 .info-screen {
     position: absolute;
     width: 32%;
@@ -6,7 +8,7 @@
     height: calc(51vw / 15 * 24);
     max-height: calc(560px * 0.51 / 15 * 24);
     top: 17%;
-    border-left: 1px solid rgba(0, 0, 0, .75);
+    border-left: 1px solid $secondary-color;
 }
 .info-block {
     position: absolute;

@@ -1,9 +1,11 @@
+@import '../../assets/styles/variables.scss';
+
 .point-row {
     display: flex;
     box-sizing: border-box;
     margin: 0 auto;
     height: calc(51vw / 15);
     max-height: calc(560px * 0.51 / 15);
-    background-color: #A8B6AF;
+    background-color: $primary-color;
     padding-top: 1px;
 }
