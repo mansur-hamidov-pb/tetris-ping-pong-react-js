@@ -1,16 +1,35 @@
 import React from 'react';
 import { range } from 'lodash';
+
 import { InfoScreen } from './components/InfoPanel';
+import { PauseMenu } from './components/PauseMenu';
 import { Point } from './components/Point';
 import { PointRow } from './components/PointRow';
-import { gameScreen, directions, gameInitialState, levelsCount, levels } from './consts';
-import { isBallAtPoint, getBallMovementResult, doesBallTouchGround, resetBallPosition } from './utils/ball';
-import { isRacketAtPoint, moveRacket } from './utils/racket';
-import { isScoreAtPoint, isLevelCompleted, checkAndSetHiScore } from './utils/score';
-import controls from './utils/controls';
-import "./App.css";
 import { Touchpad } from './components/Touchpad';
-import { PauseMenu } from './components/PauseMenu';
+
+import {
+    gameScreen,
+    directions,
+    gameInitialState,
+    levelsCount,
+    levels
+} from './consts';
+
+import controls from './utils/controls';
+import {
+    doesBallTouchGround,
+    getBallMovementResult,
+    isBallAtPoint,
+    resetBallPosition
+} from './utils/ball';
+import { isRacketAtPoint, moveRacket } from './utils/racket';
+import {
+    checkAndSetHiScore,
+    isLevelCompleted,
+    isScoreAtPoint,
+} from './utils/score';
+
+import "./App.css";
 
 class App extends React.Component {
     state = {
@@ -29,6 +48,15 @@ class App extends React.Component {
             level: nextLevel,
             livesCount: livesCount
         });
+    };
+
+    togglePause = () => {
+        if (this.state.paused) {
+            this.ballMovingInterval = setInterval(this.handleBallMove, this.state.ballMovingInterval);
+        } else {
+            clearInterval(this.ballMovingInterval);
+        }
+        this.setState({ paused: !this.state.paused });
     }
 
     restartGame = (fullRestart) => {
@@ -45,6 +73,7 @@ class App extends React.Component {
             racketPosition: fullRestart ? racketPosition : state.racketPosition,
             livesCount: fullRestart ? livesCount : state.livesCount - 1,
             scored: fullRestart ? 0 : state.scored,
+            paused: false
         }));
         
     };
@@ -78,12 +107,7 @@ class App extends React.Component {
         });
 
         window.addEventListener(gameEvents.TOGGLE_PAUSE, () => {
-            if (this.state.paused) {
-                this.ballMovingInterval = setInterval(this.handleBallMove, this.state.ballMovingInterval);
-            } else {
-                clearInterval(this.ballMovingInterval);
-            }
-            this.setState({ paused: !this.state.paused });
+            this.togglePause();
         });
 
         window.addEventListener(gameEvents.RESTART_GAME, () => {
@@ -114,7 +138,11 @@ class App extends React.Component {
                         level={this.state.level}
                         scored={this.state.scored}
                     />
-                    <PauseMenu paused={this.state.paused} />
+                    <PauseMenu
+                        paused={this.state.paused}
+                        onRestart={() => this.restartGame(true)}
+                        onResume={this.togglePause}
+                    />
                 </div>
                 <Touchpad />
             </div>

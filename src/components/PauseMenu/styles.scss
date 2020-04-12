@@ -1,0 +1,38 @@
+@import '../../assets/styles/variables.scss';
+
+.pause-menu {
+    position: absolute;
+    top: 30vh;
+    width: 100%;
+    font-family: digital;
+    font-weight: normal;
+    text-align: center;
+
+    &__content {
+        width: 75%;
+        margin: 0 auto;
+        background-color: $primary-color;
+        border: 2px outset $secondary-color;
+        border-radius: 10px;
+
+        &__item {
+            display: block;
+            width: 100%;
+            background: transparent;
+            padding: 10px 0;
+            font-family: inherit;
+            font-size: 20px;
+            border: none;
+            outline: 0;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid $secondary-color;
+            }
+
+            &:active {
+                color: $primary-color;
+                background: $secondary-color;
+            }
+        }
+    }
+}
