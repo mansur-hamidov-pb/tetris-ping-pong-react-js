@@ -4,7 +4,7 @@ const stylesTouchpad = {
     height: '50px',
     borderRadius: '25px',
     backgroundColor: '#D5C842',
-    width: '47%',
+    width: '60%',
     margin: '200px auto',
     border: '6px outset #D5C842',
     display: 'flex',
