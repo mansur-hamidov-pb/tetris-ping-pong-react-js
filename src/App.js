@@ -10,6 +10,7 @@ import { isScoreAtPoint, isLevelCompleted, checkAndSetHiScore } from './utils/sc
 import controls from './utils/controls';
 import "./App.css";
 import { Touchpad } from './components/Touchpad';
+import { PauseMenu } from './components/PauseMenu';
 
 class App extends React.Component {
     state = {
@@ -69,7 +70,6 @@ class App extends React.Component {
         window.addEventListener(gameEvents.MOVE_RACKET_LEFT, () => {
             if (this.state.paused) return;
             this.setState(state => moveRacket(directions.LEFT, state.racketPosition, state.ballCoordinates));
-            // setTimeout(() => console.log(this.state.ballCoordinates));
         });
 
         window.addEventListener(gameEvents.MOVE_RACKET_RIGHT, () => {
@@ -114,6 +114,7 @@ class App extends React.Component {
                         level={this.state.level}
                         scored={this.state.scored}
                     />
+                    <PauseMenu paused={this.state.paused} />
                 </div>
                 <Touchpad />
             </div>
