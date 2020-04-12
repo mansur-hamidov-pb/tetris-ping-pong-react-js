@@ -14,20 +14,23 @@
     text-align: right;
 }
 .level {
-    top: 16px;
+    top: 5.7%;
 }
 .lives {
-    top: 142px;
+    top: 43.2%;
 }
 .score {
-    top: 58px;
+    top: 18.2%;
 }
 .hi-score {
-    top: 100px;
+    top: 30.8%;
 }
 .value {
-    font-weight: bold;
-    font-size: 14px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: digital;
+    font-size: 19px;
     letter-spacing: 0;
+    font-weight: normal;
+}
+.heart::after {
+    content: '♥&#xFE0E;';
 }
