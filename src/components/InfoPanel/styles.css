@@ -1,31 +1,36 @@
 .info-screen {
     position: absolute;
-    width: 33%;
+    width: 32%;
     right: 0;
     top: 0;
-    height: 100vh;
+    height: calc(51vw / 15 * 24);
+    max-height: calc(560px * 0.51 / 15 * 24);
+    top: 17%;
     border-left: 1px solid rgba(0, 0, 0, .75);
 }
 .info-block {
     position: absolute;
-    right: 8px;
+    right: 4px;
     text-align: right;
 }
 .level {
-    top: 36px;
+    top: 5.7%;
 }
 .lives {
-    top: 178px;
+    top: 43.2%;
 }
 .score {
-    top: 84px;
+    top: 18.2%;
 }
 .hi-score {
-    top: 132px;
+    top: 30.8%;
 }
 .value {
-    font-weight: bold;
-    font-size: 23px;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: digital;
+    font-size: 19px;
     letter-spacing: 0;
+    font-weight: normal;
+}
+.heart::after {
+    content: '♥&#xFE0E;';
 }

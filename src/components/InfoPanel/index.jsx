@@ -22,9 +22,18 @@ export const InfoScreen = ({
             <div className="info-block lives">
                 LIVES <br />
                 <span className="value">
-                {range(livesCount).map(_ => (
-                    <React.Fragment key={_}>&hearts;</React.Fragment>
-                ))}
+                    {range(livesCount).map(_ => (
+                        <img
+                            src={require('../../assets/img/heart.png')}
+                            alt="heart"
+                            style={{
+                                opacity: 0.65,
+                                width: '14px',
+                                height: '18px'
+                            }}
+                            key={_}
+                        />
+                    ))}
                 </span>
             </div>
         </div>

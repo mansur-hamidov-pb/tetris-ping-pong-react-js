@@ -1,9 +1,19 @@
+@font-face {
+    font-family: digital;
+    src: url('./assets/fonts/digital-7-webfont.woff2') format('woff2'),
+         url('./assets/fonts/digital-7-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 body {
     padding: 0;
     margin: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 11px;
-    color: rgba(0, 0, 0, .75);  
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, .75);
+    overflow: hidden;
+    background-color: black;
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */
        -moz-user-select: none; /* Old versions of Firefox */
@@ -12,11 +22,21 @@ body {
                                   supported by Chrome, Opera and Firefox */
 }
 .App {
+    background-image: url('./assets/img/background.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    overflow: hidden;
     width: 100%;
-    max-width: 412px;
+    max-width: 560px;
+    height: 100vh;
     margin: 0 auto;
     position: relative;
+    box-sizing: border-box;
 }
 .game-screen {
-    width: 100%;
+    width: 52%;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 2%;
+    padding-top: 16.5%;
 }
