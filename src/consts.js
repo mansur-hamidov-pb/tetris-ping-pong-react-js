@@ -85,8 +85,8 @@ const racketPositionSamples = [
 
 const initialBallCoordinates = [
     {
-        x: 5,
-        y: 24
+        x: 6,
+        y: 23
     },
     {
         x: 6,
@@ -160,7 +160,7 @@ export const levels = {
 export const levelsCount = Object.keys(levels).length;
 
 export const gameInitialState = {
-    paused: true,
+    paused: false,
     level: 1,
     ballCoordinates: initialBallCoordinates,
     livesCount: initialLivesCount,

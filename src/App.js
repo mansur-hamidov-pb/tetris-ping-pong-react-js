@@ -19,16 +19,13 @@ class App extends React.Component {
     ballMovingInterval = null;
 
     goToTheNextLevel = () => {
-        clearInterval(this.ballMovingInterval);
-        this.ballMovingInterval = null;
         const { level, livesCount } = this.state;
         const nextLevel = level >= levelsCount ? 1 : level + 1;
         this.setState({
             ...gameInitialState,
             ...levels[nextLevel],
             level: nextLevel,
-            livesCount: livesCount, 
-            paused: true,
+            livesCount: livesCount
         });
     }
 
@@ -38,8 +35,6 @@ class App extends React.Component {
             checkAndSetHiScore(this.state.scored);
         }
 
-        clearInterval(this.ballMovingInterval);
-        this.ballMovingInterval = null;
         this.setState(state =>({
             ballMovingInterval: fullRestart ? ballMovingInterval : state.ballMovingInterval,
             level: fullRestart ? 1 : state.level,
@@ -48,7 +43,6 @@ class App extends React.Component {
             racketPosition: fullRestart ? racketPosition : state.racketPosition,
             livesCount: fullRestart ? livesCount : state.livesCount - 1,
             scored: fullRestart ? 0 : state.scored,
-            paused: true
         }));
         
     };
@@ -70,7 +64,7 @@ class App extends React.Component {
     componentDidMount () {
         controls.init();
         const { gameEvents } = controls;
-
+        this.ballMovingInterval = setInterval(this.handleBallMove, this.state.ballMovingInterval);
         window.addEventListener(gameEvents.MOVE_RACKET_LEFT, () => {
             if (this.state.paused) return;
             this.setState(state => moveRacket(directions.LEFT, state.racketPosition, state.ballCoordinates));

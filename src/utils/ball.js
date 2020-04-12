@@ -38,7 +38,6 @@ export function getNextCoordinates (ballCoordinates, direction) {
             nextCoordinates.x = currentCoordinates.x - 1;
             nextCoordinates.y = currentCoordinates.y;
     }
-
     return [currentCoordinates, nextCoordinates];
 }
 
@@ -87,6 +86,13 @@ export function getScoringResult (ballCoordinates, ballMoveDirection, scoreCoord
 }
 
 export function getBallMovementResult (ballCoordinates, racketCoordinates, scoreCoordinates) {
+    const [previousCoordinates, currentCoordinates] = ballCoordinates;
+    if (JSON.stringify(previousCoordinates) === JSON.stringify(currentCoordinates)) {
+        return {
+            ballCoordinates,
+            scores: scoreCoordinates
+        };
+    }
     const ballMovementDirection = getBallMoveDirection(ballCoordinates);
     const wallTouchSide = getWallTouchedSide(ballCoordinates);
     const ballTouchesRacket = doesBallTouchRacket(ballCoordinates, racketCoordinates);
@@ -136,8 +142,10 @@ export function getBallMoveDirection (ballCoordinates) {
         return directions.TOP_RIGHT;
     } else if (currentCoordinates.x < previousCoordinates.x && currentCoordinates.y > previousCoordinates.y) {
         return directions.BOTTOM_LEFT;
-    } else {
+    } else if (currentCoordinates.x < previousCoordinates.x && currentCoordinates.y < previousCoordinates.y) {
         return directions.TOP_LEFT;
+    } else {
+        return null;
     }
 }
 
@@ -361,15 +369,10 @@ export function getRacketTouchingBallNextDirection (ballCoordinates, wallTouchSi
 }
 
 export function resetBallPosition (racketCoordinates) {
-    const ballPreviousCoordinates = {
-        x: racketCoordinates[racketCoordinates.length - 2].x,
-        y: getRacketVerticalPosition(racketCoordinates)
+    const ballCoordinates = {
+        x: racketCoordinates[racketCoordinates.length - 2].x + 1,
+        y: getRacketVerticalPosition(racketCoordinates) - 1
     };
 
-    const ballCurrentCoordinates = {
-        x: ballPreviousCoordinates.x + 1,
-        y: ballPreviousCoordinates.y - 1
-    }
-
-    return [ballPreviousCoordinates, ballCurrentCoordinates];
+    return [ballCoordinates, ballCoordinates];
 }
