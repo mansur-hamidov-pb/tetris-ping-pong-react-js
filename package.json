@@ -20,6 +20,7 @@
     "start": "react-scripts start",
     "build:web": "react-scripts build",
     "build:android": "rm -rf www && react-scripts build && mkdir www && mv build/* www && cordova build android",
+    "platform:android": "cordova platform add android",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
