@@ -8,11 +8,12 @@ import { PointRow } from './components/PointRow';
 import { Touchpad } from './components/Touchpad';
 
 import {
-    gameScreen,
+    animation,
     directions,
     gameInitialState,
+    gameScreen,
+    levels,
     levelsCount,
-    levels
 } from './consts';
 
 import controls from './utils/controls';
@@ -38,6 +39,11 @@ class App extends React.Component {
     };
 
     ballMovingInterval = null;
+    loadingTimeout = null;
+
+    isRowFilled = (row, col) => {
+        return Boolean(this.state.loading) && this.state.loading <= row && col <= gameScreen.width;
+    }
 
     goToTheNextLevel = () => {
         const { level, livesCount } = this.state;
@@ -52,23 +58,32 @@ class App extends React.Component {
             () => {
                 clearInterval(this.ballMovingInterval);
                 this.ballMovingInterval = setInterval(this.handleBallMove, this.state.ballMovingInterval);
+                this.toggleLoadingAnimation(animation.FAST);
             }
         );  
     };
 
     togglePause = () => {
-        if (this.state.paused) {
+        const { paused, loading } = this.state;
+        if (loading) {
+            this.toggleLoadingAnimation();
+        } else if (paused) {
             this.ballMovingInterval = setInterval(this.handleBallMove, this.state.ballMovingInterval);
         } else {
             clearInterval(this.ballMovingInterval);
         }
-        this.setState({ paused: !this.state.paused });
+        if (!loading) {
+            this.setState({ paused: !this.state.paused });
+        }
     }
 
     restartGame = (fullRestart) => {
         const { scores, ballCoordinates, racketPosition, livesCount, ballMovingInterval } = gameInitialState;
         if (fullRestart) {
             checkAndSetHiScore(this.state.scored);
+            this.toggleLoadingAnimation(animation.SLOW);
+        } else {
+            this.toggleLoadingAnimation(animation.FAST);
         }
 
         this.setState(state => ({
@@ -84,6 +99,28 @@ class App extends React.Component {
 
         clearInterval(this.ballMovingInterval);
         this.ballMovingInterval = setInterval(this.handleBallMove, gameInitialState.ballMovingInterval);
+    };
+
+    toggleLoadingAnimation = (speed) => {
+        const { loading } = this.state;
+        if (loading) {
+            clearInterval(this.loadingTimeout);
+            this.loadingTimeout = null;
+            this.setState({ loading: 0 });
+        } else {
+            this.setState({ loading: gameScreen.height });
+            this.loadingTimeout = setInterval(
+                () => {
+                    if (this.state.loading) {
+                        this.setState(state => ({ loading: state.loading - 1}));
+                    } else {
+                        clearInterval(this.loadingTimeout);
+                        this.loadingTimeout = null;
+                    }
+                },
+                speed
+            );
+        }
     };
 
     handleBallMove = () => {
@@ -103,14 +140,22 @@ class App extends React.Component {
     componentDidMount () {
         controls.init();
         const { gameEvents } = controls;
+        this.toggleLoadingAnimation(animation.SLOW);
         this.ballMovingInterval = setInterval(this.handleBallMove, this.state.ballMovingInterval);
+
+        window.addEventListener('blur', () => {
+            if (!this.state.paused) {
+                this.togglePause();
+            }
+        });
+
         window.addEventListener(gameEvents.MOVE_RACKET_LEFT, () => {
-            if (this.state.paused) return;
+            if (this.state.paused || this.state.loading) return;
             this.setState(state => moveRacket(directions.LEFT, state.racketPosition, state.ballCoordinates));
         });
 
         window.addEventListener(gameEvents.MOVE_RACKET_RIGHT, () => {
-            if (this.state.paused) return;
+            if (this.state.paused || this.state.loading) return;
             this.setState(state => moveRacket(directions.RIGHT, state.racketPosition, state.ballCoordinates));
         });
 
@@ -135,7 +180,8 @@ class App extends React.Component {
                                     filled={
                                         isRacketAtPoint(this.state.racketPosition, col, row) ||
                                         isBallAtPoint(this.state.ballCoordinates, col, row) ||
-                                        isScoreAtPoint(this.state.scores, col, row)
+                                        isScoreAtPoint(this.state.scores, col, row) ||
+                                        this.isRowFilled(row, col)
                                     }
                                 />
                             ))}

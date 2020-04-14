@@ -3,6 +3,11 @@ export const gameScreen = {
     height: 24
 }
 
+export const animation = {
+    FAST: 10,
+    SLOW: 100
+}
+
 export const directions = {
     TOP: 'top',
     LEFT: 'left',
@@ -164,6 +169,7 @@ export const gameInitialState = {
     level: 1,
     ballCoordinates: initialBallCoordinates,
     livesCount: initialLivesCount,
+    loading: 0,
     ...levels[1]
 }
 
