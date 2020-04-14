@@ -10,6 +10,7 @@
 
 # production
 /build
+/www
 
 # misc
 .DS_Store
@@ -21,3 +22,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+bin/*
+!/plugins
+!/plugins/android.json
+!/plugins/fetch.json
+plugins/*
+platforms/*

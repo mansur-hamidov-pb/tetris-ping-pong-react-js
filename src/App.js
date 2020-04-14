@@ -42,12 +42,18 @@ class App extends React.Component {
     goToTheNextLevel = () => {
         const { level, livesCount } = this.state;
         const nextLevel = level >= levelsCount ? 1 : level + 1;
-        this.setState({
-            ...gameInitialState,
-            ...levels[nextLevel],
-            level: nextLevel,
-            livesCount: livesCount
-        });
+        this.setState(
+            {
+                ...gameInitialState,
+                ...levels[nextLevel],
+                level: nextLevel,
+                livesCount: livesCount
+            },
+            () => {
+                clearInterval(this.ballMovingInterval);
+                this.ballMovingInterval = setInterval(this.handleBallMove, this.state.ballMovingInterval);
+            }
+        );  
     };
 
     togglePause = () => {
@@ -65,7 +71,7 @@ class App extends React.Component {
             checkAndSetHiScore(this.state.scored);
         }
 
-        this.setState(state =>({
+        this.setState(state => ({
             ballMovingInterval: fullRestart ? ballMovingInterval : state.ballMovingInterval,
             level: fullRestart ? 1 : state.level,
             scores: fullRestart ? scores : state.scores,
@@ -75,7 +81,9 @@ class App extends React.Component {
             scored: fullRestart ? 0 : state.scored,
             paused: false
         }));
-        
+
+        clearInterval(this.ballMovingInterval);
+        this.ballMovingInterval = setInterval(this.handleBallMove, gameInitialState.ballMovingInterval);
     };
 
     handleBallMove = () => {
