@@ -98,7 +98,8 @@ class App extends React.Component {
         }));
 
         clearInterval(this.ballMovingInterval);
-        this.ballMovingInterval = setInterval(this.handleBallMove, gameInitialState.ballMovingInterval);
+        const _ballMovingInterval = fullRestart ? gameInitialState.ballMovingInterval : this.state.ballMovingInterval;
+        this.ballMovingInterval = setInterval(this.handleBallMove, _ballMovingInterval);
     };
 
     toggleLoadingAnimation = (speed) => {
