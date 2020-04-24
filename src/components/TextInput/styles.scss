@@ -1,0 +1,21 @@
+@import '../../assets/styles/variables.scss';
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    &__label {
+        font-size: 16px;
+        padding-bottom: 4px;
+    }
+
+    &__input {
+        background: transparent;
+        border: 1px dashed black;
+        border-radius: 4px;
+        padding: 8px 8px;
+        color: rgba(0, 0, 0, .75);
+        font-family: Helvetica;
+        margin-bottom: 8px;
+    }
+}

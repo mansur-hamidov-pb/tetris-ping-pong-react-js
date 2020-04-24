@@ -171,5 +171,19 @@ export const gameInitialState = {
     livesCount: initialLivesCount,
     loading: 0,
     ...levels[1]
+};
+
+export const asyncDataStatus = {
+    INITIAL: 'initial',
+    LOADING: 'loading',
+    SUCCESS: 'success',
+    ERROR: 'error'
+};
+
+export const viewMode = {
+    BRICK_BREAKER: 'brick_breaker',
+    MAIN_MENU: 'main_menu',
+    SIGN_IN_SCREEN: 'sign_in_screen',
+    SIGN_UP_SCREEN: 'sign_up_screen'
 }
 
