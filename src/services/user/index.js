@@ -1,3 +1,4 @@
+import { API_URL } from '../../consts';
 import { httpClient } from '../../httpClient';
 
 export class UserService {
@@ -25,4 +26,4 @@ export class UserService {
     }
 }
 
-export const userService = new UserService(httpClient, 'http://brickbreaker.mygamesonline.org');
+export const userService = new UserService(httpClient, API_URL);

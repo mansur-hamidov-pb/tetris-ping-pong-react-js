@@ -1,3 +1,8 @@
+export const API_URL =
+    process.env.NODE_ENV === 'development'
+        ? 'http://brickbreaker.local'
+        : 'http://brickbreaker.mygamesonline.org'
+
 export const gameScreen = {
     width: 10,
     height: 24

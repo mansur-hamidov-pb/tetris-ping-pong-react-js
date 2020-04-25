@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Touchpad } from './components/Touchpad';
-import { viewMode } from './consts';
+import { asyncDataStatus, viewMode } from './consts';
 
 import { BrickBreaker } from './games/BrickBreaker';
 import { MainMenu } from './views/MainMenu';
@@ -15,7 +15,8 @@ const App = () => {
     const [currentView, setView] = React.useState(viewMode.MAIN_MENU);
     const {
         data: {
-            authorized
+            authorized,
+            status
         },
         signIn
     } = useUser();
@@ -52,6 +53,7 @@ const App = () => {
                     <SignInScreen
                         onSignIn={handleSignin}
                         onGoBack={() => setView(viewMode.MAIN_MENU)}
+                        isLoading={status === asyncDataStatus.LOADING}
                     />
                 )}
             </div>

@@ -8,7 +8,8 @@ export const Button = ({
     onClick,
     primary,
     secondary,
-    block
+    block,
+    disabled
 }) => {
     const classNames = ['button'];
     if (primary) {
@@ -20,8 +21,11 @@ export const Button = ({
     if (block) {
         classNames.push('button--block');
     }
+    if (disabled) {
+        classNames.push('button--disabled');
+    }
     return (
-        <button className={classNames.join(' ')} type={type} onClick={onClick}>
+        <button className={classNames.join(' ')} type={type} onClick={!disabled && onClick} disabled={disabled}>
             {label}
         </button>
     )

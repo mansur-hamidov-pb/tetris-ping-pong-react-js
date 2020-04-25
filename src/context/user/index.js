@@ -53,8 +53,8 @@ export const UserProvider = ({ children }) => {
 
         userService.signIn(_data)
             .then(({ data }) => {
-                localStorage.setItem('authToken', data.authToken);
-                httpClient.defaults.headers.authToken = data.authToken;
+                localStorage.setItem('authToken', data['Auth-Token']);
+                httpClient.defaults.headers['Auth-Token'] = data['Auth-Token'];
                 setData(() => ({
                     authorized: true,
                     username: data.username,
@@ -75,7 +75,7 @@ export const UserProvider = ({ children }) => {
 
         userService.signOut()
             .then(() => {
-                httpClient.defaults.headers.authToken = null;
+                httpClient.defaults.headers['Auth-Token'] = null;
                 setData({
                     authorized: false,
                     status: asyncDataStatus.INITIAL
@@ -91,8 +91,8 @@ export const UserProvider = ({ children }) => {
 
         userService.signUp(_data)
             .then(({ data }) => {
-                localStorage.setItem('authToken', data.authToken);
-                httpClient.defaults.headers.authToken = data.authToken;
+                localStorage.setItem('authToken', data['Auth-Token']);
+                httpClient.defaults.headers['Auth-Token'] = data['Auth-Token'];
                 setData({
                     authorized: true,
                     username: data.username,

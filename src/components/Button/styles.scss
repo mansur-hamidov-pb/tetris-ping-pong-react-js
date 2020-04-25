@@ -29,4 +29,8 @@
         margin-bottom: 10px;
         margin-top: 4px;
     }
+    
+    &--disabled {
+        opacity: 0.35;
+    }
 }

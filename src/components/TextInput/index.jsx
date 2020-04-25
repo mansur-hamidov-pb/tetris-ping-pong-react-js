@@ -7,15 +7,18 @@ export const TextInput = ({
     value,
     placeholder,
     label,
-    id
+    id,
+    password,
+    disabled
 }) => (
     <div className="input-wrapper">
         <label className="input-wrapper__label" htmlFor={id}>{label}</label>
         <input
-            autoComplete="new-password"
+            autoComplete="off"
             className="input-wrapper__input"
+            disabled={disabled}
             id={id}
-            type="text"
+            type={password ? "password" : "text"}
             value={value}
             onChange={(event) => onChange(event.target.value)}
             placeholder={placeholder}
