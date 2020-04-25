@@ -12,7 +12,7 @@ export const UserContext = createContext({
 
 export const UserProvider = ({ children }) => {
     const [data, setData] = useState({
-        isGuest: true,
+        authorized: false,
         status: asyncDataStatus.INITIAL
     });
 
@@ -25,19 +25,19 @@ export const UserProvider = ({ children }) => {
                 });
     
                 userService.getData()
-                    .then(({ data }) => {
-                        if (data) {
+                    .then(({ data: _data }) => {
+                        if (_data) {
                             setData({
-                                isGuest: false,
-                                username: data.username,
-                                avatar: data.avatar,
+                                authorized: true,
+                                username: _data.username,
+                                avatar: _data.avatar,
                                 status: asyncDataStatus.SUCCESS
                             });
                         } 
                     })
                     .catch(() => {
                         setData({
-                            isGuest: true,
+                            authorized: false,
                             status: asyncDataStatus.INITIAL
                         });
                     });
@@ -56,7 +56,7 @@ export const UserProvider = ({ children }) => {
                 localStorage.setItem('authToken', data.authToken);
                 httpClient.defaults.headers.authToken = data.authToken;
                 setData(() => ({
-                    isGuest: false,
+                    authorized: true,
                     username: data.username,
                     avatar: data.avatar
                 }));
@@ -77,7 +77,7 @@ export const UserProvider = ({ children }) => {
             .then(() => {
                 httpClient.defaults.headers.authToken = null;
                 setData({
-                    isGuest: true,
+                    authorized: false,
                     status: asyncDataStatus.INITIAL
                 })
             })
@@ -94,7 +94,7 @@ export const UserProvider = ({ children }) => {
                 localStorage.setItem('authToken', data.authToken);
                 httpClient.defaults.headers.authToken = data.authToken;
                 setData({
-                    isGuest: false,
+                    authorized: true,
                     username: data.username,
                     avatar: data.avatar
                 });

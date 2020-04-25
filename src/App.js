@@ -15,18 +15,18 @@ const App = () => {
     const [currentView, setView] = React.useState(viewMode.MAIN_MENU);
     const {
         data: {
-            isGuest
+            authorized
         },
         signIn
     } = useUser();
 
     React.useEffect(
         () => {
-            if (!isGuest && currentView === viewMode.SIGN_IN_SCREEN) {
+            if (authorized && currentView === viewMode.SIGN_IN_SCREEN) {
                 setView(viewMode.MAIN_MENU)
             }
         },
-        [isGuest]
+        [authorized, currentView]
     );
 
     const handleSignin = (login, password) => {

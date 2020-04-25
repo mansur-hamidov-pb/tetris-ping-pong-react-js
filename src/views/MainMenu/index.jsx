@@ -13,7 +13,7 @@ export const MainMenu = ({
 }) => {
     const {
         data: {
-            isGuest
+            authorized
         },
         signOut
     } = useUser();
@@ -21,7 +21,7 @@ export const MainMenu = ({
         <Layout>
             <div className="main-menu">
                 <div className="main-menu__content">
-                    {isGuest ? (
+                    {!authorized ? (
                         <>
                             <button href="#" className="main-menu__content__item" onClick={onSignUp}>CREATE NEW USER</button>
                             <button href="#" className="main-menu__content__item" onClick={onSignIn}>SIGN IN</button>

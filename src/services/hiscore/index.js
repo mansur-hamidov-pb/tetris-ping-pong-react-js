@@ -6,13 +6,14 @@ export class UserService {
         this.httpClient = httpClient;
     }
 
-    path = '/user';
+    path = '/hi-score';
 
-    getData () {
-        return this.httpClient.get(`${this.publicUrl}${this.path}`);
+    setHiScore (score) {
+
+        return this.httpClient.post(`${this.publicUrl}${this.path}`);
     }
 
-    signUp (data) {
+    getHiScore (data) {
         return this.httpClient.post(`${this.publicUrl}${this.path}`, data);
     }
 
