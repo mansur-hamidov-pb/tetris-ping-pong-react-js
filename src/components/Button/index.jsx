@@ -25,7 +25,7 @@ export const Button = ({
         classNames.push('button--disabled');
     }
     return (
-        <button className={classNames.join(' ')} type={type} onClick={!disabled && onClick} disabled={disabled}>
+        <button className={classNames.join(' ')} type={type} onClick={!disabled ? onClick : undefined} disabled={disabled}>
             {label}
         </button>
     )

@@ -10,7 +10,6 @@ export class UserService {
     path = '/hi-score';
 
     setHiScore (score) {
-
         return this.httpClient.post(`${this.publicUrl}${this.path}`);
     }
 

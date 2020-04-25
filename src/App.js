@@ -6,6 +6,7 @@ import { asyncDataStatus, viewMode } from './consts';
 import { BrickBreaker } from './games/BrickBreaker';
 import { MainMenu } from './views/MainMenu';
 import { SignInScreen } from './views/SignIn';
+import { SignUpScreen } from './views/SignUp';
 
 import "./App.css";
 import { useUser } from './context/user/hooks';
@@ -16,14 +17,19 @@ const App = () => {
     const {
         data: {
             authorized,
-            status
+            status,
+            errors
         },
-        signIn
+        signIn,
+        signUp,
+        clearErrors
     } = useUser();
+
+    React.useEffect(clearErrors, [currentView])
 
     React.useEffect(
         () => {
-            if (authorized && currentView === viewMode.SIGN_IN_SCREEN) {
+            if (authorized && [viewMode.SIGN_IN_SCREEN, viewMode.SIGN_UP_SCREEN].includes(currentView)) {
                 setView(viewMode.MAIN_MENU)
             }
         },
@@ -32,6 +38,10 @@ const App = () => {
 
     const handleSignin = (login, password) => {
         signIn({ login, password });
+    }
+
+    const handleSignup = (data) => {
+        signUp(data);
     }
 
     return (
@@ -51,9 +61,18 @@ const App = () => {
                 )}
                 {currentView === viewMode.SIGN_IN_SCREEN && (
                     <SignInScreen
+                        errors={errors}
                         onSignIn={handleSignin}
                         onGoBack={() => setView(viewMode.MAIN_MENU)}
                         isLoading={status === asyncDataStatus.LOADING}
+                    />
+                )}
+                {currentView === viewMode.SIGN_UP_SCREEN && (
+                    <SignUpScreen
+                        onGoBack={() => setView(viewMode.MAIN_MENU)}
+                        isLoading={status === asyncDataStatus.LOADING}
+                        onSignUp={handleSignup}
+                        errors={errors}
                     />
                 )}
             </div>

@@ -13,6 +13,7 @@
     box-sizing: border-box;
 
     &__content {
+        position: relative;
         width: 65%;
         padding: 25px 10px;
         padding-bottom: 10px;

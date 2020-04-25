@@ -22,7 +22,15 @@ export class UserService {
     }
 
     signOut () {
-        return this.httpClient.post( `${this.publicUrl}${this.path}/signout`);
+        return this.httpClient.post(`${this.publicUrl}${this.path}/signout`);
+    }
+
+    getIP () {
+        return this.httpClient.get(`${this.publicUrl}${this.path}/ip`);
+    }
+
+    getLocationByIp (ip) {
+        return this.httpClient.get(`https://www.iplocate.io/api/lookup/${ip}`);
     }
 }
 

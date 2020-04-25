@@ -5,6 +5,7 @@ import { httpClient } from '../../httpClient';
 
 export const UserContext = createContext({
     data: null,
+    clearErrors: null,
     signIn: null,
     signOut: null,
     signUp: null,
@@ -13,7 +14,8 @@ export const UserContext = createContext({
 export const UserProvider = ({ children }) => {
     const [data, setData] = useState({
         authorized: false,
-        status: asyncDataStatus.INITIAL
+        status: asyncDataStatus.INITIAL,
+        erros: null
     });
 
     React.useEffect(
@@ -58,19 +60,26 @@ export const UserProvider = ({ children }) => {
                 setData(() => ({
                     authorized: true,
                     username: data.username,
-                    avatar: data.avatar
+                    avatar: data.avatar,
+                    status: asyncDataStatus.SUCCESS,
+                    errors: null
                 }));
             })
             .catch(error => {
                 if (error.response) {
-                    console.log(error.response);
+                    setData({
+                        authorized: false,
+                        status: asyncDataStatus.ERROR,
+                        errors: ["Invalid login/password"]
+                    });
                 }
             });
     };
 
     const handleSignOut = () => {
         setData({
-            status: asyncDataStatus.LOADING
+            status: asyncDataStatus.LOADING,
+            errors: null
         });
 
         userService.signOut()
@@ -96,25 +105,40 @@ export const UserProvider = ({ children }) => {
                 setData({
                     authorized: true,
                     username: data.username,
-                    avatar: data.avatar
+                    avatar: data.avatar,
+                    status: asyncDataStatus.SUCCESS,
+                    errors: null
                 });
             })
             .catch(error => {
                 if (error.response) {
-                    console.log(error.response);
+                    setData({
+                        authorized: false,
+                        status: asyncDataStatus.ERROR,
+                        errors: error.response.data.error_fields
+                    });
                 }
             });
     };
+
+    const clearErrors = () => {
+        setData(state => ({
+            ...state,
+            status: asyncDataStatus.INITIAL,
+            errors: null
+        }));
+    }
 
 
     return (
         <UserContext.Provider value={{
             data,
+            clearErrors,
             signIn: handleSignIn,
             signOut: handleSignOut,
             signUp: handleSignUp
         }}>
-            { children }
+            {children}
         </UserContext.Provider>
     )
 };

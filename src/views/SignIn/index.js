@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Layout } from '../Layout';
-import { TextInput } from '../../components/TextInput';
 import { Button } from '../../components/Button';
+import { TextInput } from '../../components/TextInput';
+import { Loading } from '../../components/Loading';
+import { Layout } from '../Layout';
 
 import "./styles.scss";
-import { Loading } from '../../components/Loading';
 
 export const SignInScreen = ({
     onSignIn,
@@ -32,7 +32,8 @@ export const SignInScreen = ({
                         label="Username or email"
                     />
                     <TextInput
-                        password
+                        errorMessage={Boolean(errors && errors.length) && errors[0]}
+                        type="password"
                         id="password"
                         disabled={isLoading}
                         placeholder="Enter password"
