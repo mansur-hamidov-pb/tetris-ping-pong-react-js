@@ -10,6 +10,8 @@ import { SignUpScreen } from './views/SignUp';
 
 import "./App.css";
 import { useUser } from './context/user/hooks';
+import { useHiScore } from './context/hiscore/hooks';
+import { Rating } from './views/Rating';
 
 
 const App = () => {
@@ -24,6 +26,7 @@ const App = () => {
         signUp,
         clearErrors
     } = useUser();
+    const { record, setHiScore } = useHiScore();
 
     React.useEffect(clearErrors, [currentView])
 
@@ -52,11 +55,14 @@ const App = () => {
                         onPlay={() => setView(viewMode.BRICK_BREAKER)}
                         onSignIn={() => setView(viewMode.SIGN_IN_SCREEN)}
                         onSignUp={() => setView(viewMode.SIGN_UP_SCREEN)}
+                        onGoToRating={() => setView(viewMode.RATING_TABLE)}
                     />
                 )}
                 {currentView === viewMode.BRICK_BREAKER && (
                     <BrickBreaker
                         goToMainMenu={() => setView(viewMode.MAIN_MENU)}
+                        record={record}
+                        setHiScore={setHiScore}
                     />
                 )}
                 {currentView === viewMode.SIGN_IN_SCREEN && (
@@ -74,6 +80,9 @@ const App = () => {
                         onSignUp={handleSignup}
                         errors={errors}
                     />
+                )}
+                {currentView === viewMode.RATING_TABLE && (
+                    <Rating onGoBack={() => setView(viewMode.MAIN_MENU)} />
                 )}
             </div>
             <Touchpad />

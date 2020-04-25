@@ -189,6 +189,7 @@ export const viewMode = {
     BRICK_BREAKER: 'brick_breaker',
     MAIN_MENU: 'main_menu',
     SIGN_IN_SCREEN: 'sign_in_screen',
-    SIGN_UP_SCREEN: 'sign_up_screen'
+    SIGN_UP_SCREEN: 'sign_up_screen',
+    RATING_TABLE: 'rating_table'
 }
 

@@ -24,7 +24,6 @@ import {
 } from '../utils/ball';
 import { isRacketAtPoint, moveRacket } from '../utils/racket';
 import {
-    checkAndSetHiScore,
     isLevelCompleted,
     isScoreAtPoint,
 } from '../utils/score';
@@ -77,7 +76,7 @@ export class BrickBreaker extends React.Component {
     restartGame = (fullRestart) => {
         const { scores, ballCoordinates, racketPosition, livesCount, ballMovingInterval } = gameInitialState;
         if (fullRestart) {
-            checkAndSetHiScore(this.state.scored);
+            this.props.setHiScore(this.state.scored);
             this.toggleLoadingAnimation(animation.SLOW);
         } else {
             this.toggleLoadingAnimation(animation.FAST);
@@ -188,6 +187,7 @@ export class BrickBreaker extends React.Component {
                     livesCount={this.state.livesCount}
                     level={this.state.level}
                     scored={this.state.scored}
+                    record={this.props.record}
                 />
                 <PauseMenu
                     paused={this.state.paused}

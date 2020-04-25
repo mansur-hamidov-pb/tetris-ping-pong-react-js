@@ -1,3 +1,5 @@
+import md5 from 'md5';
+
 import { API_URL } from '../../consts';
 import { httpClient } from '../../httpClient';
 
@@ -10,11 +12,16 @@ export class UserService {
     path = '/hi-score';
 
     setHiScore (score) {
-        return this.httpClient.post(`${this.publicUrl}${this.path}`);
+        const verificationToken = this.generateValidationToken(score);
+        return this.httpClient.post(`${this.publicUrl}${this.path}`, { score, verificationToken });
     }
 
-    getHiScore (data) {
-        return this.httpClient.post(`${this.publicUrl}${this.path}`, data);
+    getHiScore () {
+        return this.httpClient.get(`${this.publicUrl}${this.path}`);
+    }
+
+    getRating () {
+        return this.httpClient.get(`${this.publicUrl}${this.path}/rating`);
     }
 
     signIn (data) {
@@ -24,6 +31,11 @@ export class UserService {
     signOut () {
         return this.httpClient.post( `${this.publicUrl}${this.path}/signout`);
     }
+
+    generateValidationToken (score) {
+        const authToken = this.httpClient.defaults.headers['Auth-Token'];
+        return md5(md5(score) + md5(authToken) + authToken + md5(authToken + score));
+    }
 }
 
-export const userService = new UserService(httpClient, API_URL);
+export const hiScoreService = new UserService(httpClient, API_URL);
