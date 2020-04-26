@@ -1,7 +1,9 @@
 import React from 'react';
 
-import { Layout } from '../Layout';
+import { Loading } from '../../components/Loading';
+import { asyncDataStatus } from '../../consts';
 import { useUser } from '../../context/user/hooks';
+import { Layout } from '../Layout';
 
 import "./styles.scss";
 
@@ -13,7 +15,8 @@ export const MainMenu = ({
 }) => {
     const {
         data: {
-            authorized
+            authorized,
+            status
         },
         signOut
     } = useUser();
@@ -21,6 +24,7 @@ export const MainMenu = ({
         <Layout>
             <div className="main-menu">
                 <div className="main-menu__content">
+                    {status === asyncDataStatus.LOADING && <Loading />}
                     {!authorized ? (
                         <>
                             <button href="#" className="main-menu__content__item" onClick={onSignUp}>CREATE NEW USER</button>

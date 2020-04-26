@@ -1,7 +1,4 @@
-export const API_URL =
-    process.env.NODE_ENV === 'development'
-        ? 'http://brickbreaker.local'
-        : 'http://brickbreaker.mygamesonline.org'
+export const API_URL = 'http://brickbreaker.mygamesonline.org';
 
 export const gameScreen = {
     width: 10,
@@ -73,7 +70,7 @@ const scoreSamples = [
             9: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true, 9: true } },
         }
     },
-]
+];
 
 const racketPositionSamples = [
     [
@@ -165,7 +162,7 @@ export const levels = {
         scores: scoreSamples[5],
         ballMovingInterval: 60
     },
-}
+};
 
 export const levelsCount = Object.keys(levels).length;
 
@@ -191,5 +188,4 @@ export const viewMode = {
     SIGN_IN_SCREEN: 'sign_in_screen',
     SIGN_UP_SCREEN: 'sign_up_screen',
     RATING_TABLE: 'rating_table'
-}
-
+};

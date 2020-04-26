@@ -1,12 +1,12 @@
 import React from 'react';
 
+import { Button } from '../../components/Button';
 import { Loading } from '../../components/Loading';
 import { asyncDataStatus } from '../../consts';
 import { useHiScore } from '../../context/hiscore/hooks';
 import { Layout } from '../Layout';
 
 import "./styles.scss";
-import { Button } from '../../components/Button';
 
 export const Rating = ({
     onGoBack
@@ -25,7 +25,7 @@ export const Rating = ({
                         <Loading />
                     )}
                     {rating.status === asyncDataStatus.SUCCESS && (
-                        rating.data && rating.data.length ? (
+                        rating.data && rating.data.map ? (
                             rating.data.map((record, index) => (
                                 <div className="rating__content__item">
                                     <div className="rating__content__item__user">
@@ -36,7 +36,11 @@ export const Rating = ({
                                     </div>
                                 </div>
                             ))
-                        ) : 'Empty table'
+                        ) : (
+                            <div className="rating__content__item" style={{ justifyContent: 'center' }}>
+                                EMPTY TABLE   
+                            </div>
+                        )
                     )}
                 </div>
                 <Button secondary onClick={onGoBack} label="GO BACK" />
