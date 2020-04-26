@@ -1,11 +1,10 @@
 import React from 'react';
 import { range } from 'lodash';
 
-import { getHiScore } from '../../utils/score';
-
 import "./styles.scss";
 
 export const InfoScreen = ({
+    record,
     livesCount,
     scored,
     level,
@@ -19,7 +18,7 @@ export const InfoScreen = ({
                 SCORE <br/><span className="value">{scored}</span>
             </div>
             <div className="info-block hi-score">
-                HI-SCORE <br/><span className="value">{getHiScore()}</span>
+                HI-SCORE <br/><span className="value">{record}</span>
             </div>
             <div className="info-block lives">
                 LIVES <br />

@@ -1,3 +1,5 @@
+export const API_URL = 'http://brickbreaker.mygamesonline.org';
+
 export const gameScreen = {
     width: 10,
     height: 24
@@ -68,7 +70,7 @@ const scoreSamples = [
             9: { x: { 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true, 9: true } },
         }
     },
-]
+];
 
 const racketPositionSamples = [
     [
@@ -160,7 +162,7 @@ export const levels = {
         scores: scoreSamples[5],
         ballMovingInterval: 60
     },
-}
+};
 
 export const levelsCount = Object.keys(levels).length;
 
@@ -171,5 +173,19 @@ export const gameInitialState = {
     livesCount: initialLivesCount,
     loading: 0,
     ...levels[1]
-}
+};
 
+export const asyncDataStatus = {
+    INITIAL: 'initial',
+    LOADING: 'loading',
+    SUCCESS: 'success',
+    ERROR: 'error'
+};
+
+export const viewMode = {
+    BRICK_BREAKER: 'brick_breaker',
+    MAIN_MENU: 'main_menu',
+    SIGN_IN_SCREEN: 'sign_in_screen',
+    SIGN_UP_SCREEN: 'sign_up_screen',
+    RATING_TABLE: 'rating_table'
+};

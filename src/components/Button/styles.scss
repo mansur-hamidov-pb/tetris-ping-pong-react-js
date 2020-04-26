@@ -1,0 +1,36 @@
+@import '../../assets/styles/variables.scss';
+
+.button {
+    border: 0;
+    background: transparent;
+    border-radius: 4px;
+    font-family: digital;
+    padding: 6px 4px;
+    font-size: 18px;
+    font-weight: bold;
+    outline: none;
+
+    &--secondary {
+        background-color: $primary-color;
+        color: $secondary-color;
+        border: 1px dashed $secondary-color;
+    }
+
+    &--primary {
+        background-color: $secondary-color;
+        color: $primary-color;
+        border: 1px solid $secondary-color;
+    }
+
+    &--block {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        margin-top: 4px;
+    }
+    
+    &--disabled {
+        opacity: 0.35;
+    }
+}

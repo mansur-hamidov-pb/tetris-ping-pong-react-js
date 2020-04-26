@@ -1,0 +1,28 @@
+@import '../../assets/styles/variables.scss';
+
+.sign-in {
+    position: absolute;
+    top: 16.5%;
+    width: 97%;
+    height: 84%;
+    padding-top: 35.5%;
+    font-family: digital;
+    font-weight: normal;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+
+    &__content {
+        position: relative;
+        width: 65%;
+        padding: 25px 10px;
+        padding-bottom: 10px;
+        margin: 0 auto;
+        background-color: $primary-color;
+        border: 1px dashed $secondary-color;
+        border-radius: 10px;
+        -webkit-box-shadow: -1px 0px 29px 7px rgba(0,0,0,0.75);
+        -moz-box-shadow: -1px 0px 29px 7px rgba(0,0,0,0.75);
+        box-shadow: -1px 0px 29px 7px rgba(0,0,0,0.75);
+    }
+}
