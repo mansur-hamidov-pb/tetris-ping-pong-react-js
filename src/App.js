@@ -62,7 +62,7 @@ const App = () => {
                     <BrickBreaker
                         goToMainMenu={() => setView(viewMode.MAIN_MENU)}
                         record={record}
-                        setHiScore={setHiScore}
+                        setHiScore={(score) => setHiScore(score, authorized)}
                     />
                 )}
                 {currentView === viewMode.SIGN_IN_SCREEN && (

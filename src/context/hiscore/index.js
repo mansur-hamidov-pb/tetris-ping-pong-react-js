@@ -13,7 +13,7 @@ export const HiScoreContext = React.createContext({
 export const HiScoreProvider = ({
     children
 }) => {
-    const [record, updateRecord] = React.useState(localStorage.getItem('hiScore'));
+    const [record, updateRecord] = React.useState(localStorage.getItem('hiScore') || '0');
     const [rating, setRatingTable] = React.useState({
         status: asyncDataStatus.INITIAL,
         data: []
@@ -21,20 +21,24 @@ export const HiScoreProvider = ({
 
     React.useEffect(
         () => {
-            hiScoreService.getHiScore()
-                .then(response => {
-                    updateRecord(response.data || '0');
-                    localStorage.setItem('hiScore', response.data || '0')
-                });
+            if (hiScoreService.httpClient.defaults.headers['Auth-Token']) {
+                hiScoreService.getHiScore()
+                    .then(response => {
+                        updateRecord(response.data || '0');
+                        localStorage.setItem('hiScore', response.data || '0')
+                    });
+            }
         }
     );
 
-    const setHiScore = (score) => {
+    const setHiScore = (score, isAuthorized) => {
         if (score > record) {
             score = score.toString();
             updateRecord(score);
             localStorage.setItem('hiScore', score);
-            hiScoreService.setHiScore(score);
+            if (isAuthorized) {
+                hiScoreService.setHiScore(score);
+            }
         }
     }
 
