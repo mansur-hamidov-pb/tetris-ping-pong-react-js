@@ -4,8 +4,8 @@
     position: absolute;
     top: 0;
     width: 97%;
-    height: 84%;
-    padding-top: 35.5%;
+    height: 100%;
+    padding-top: 34.5%;
     font-family: digital;
     font-weight: normal;
     text-align: center;
@@ -15,8 +15,8 @@
     &__content {
         position: relative;
         width: 65%;
-        padding: 25px 10px;
-        padding-bottom: 10px;
+        padding: 10px 10px;
+        padding-bottom: 0;
         margin: 0 auto;
         background-color: $primary-color;
         border: 1px dashed $secondary-color;

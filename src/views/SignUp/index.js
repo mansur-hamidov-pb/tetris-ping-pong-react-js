@@ -105,7 +105,7 @@ export const SignUpScreen = ({
                         value={fieldValues.username}
                         errorMessage={fieldErrors.username}
                         onChange={setFieldValue}
-                        label="Username"
+                        label="User info"
                     />
                     <TextInput
                         id="email"
@@ -115,7 +115,6 @@ export const SignUpScreen = ({
                         value={fieldValues.email}
                         errorMessage={fieldErrors.email}
                         onChange={setFieldValue}
-                        label="Email"
                     />
                     <TextInput
                         id="fullname"
@@ -123,7 +122,6 @@ export const SignUpScreen = ({
                         placeholder="Enter your full name"
                         value={fieldValues.fullname}
                         onChange={setFieldValue}
-                        label="Full Name"
                     />
                     <TextInput
                         type="password"
@@ -144,7 +142,6 @@ export const SignUpScreen = ({
                         isValid={fieldValues.password && fieldValues.password === fieldValues.passwordRepeat}
                         value={fieldValues.passwordRepeat}
                         onChange={setFieldValue}
-                        label="Password repeat"
                     />
                     <Button
                         block
