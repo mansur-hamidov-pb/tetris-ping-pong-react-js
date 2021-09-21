@@ -1,6 +1,7 @@
 <img src="https://user-images.githubusercontent.com/56827695/134165368-d78d8792-5c6b-48cb-a2d6-be52444df62b.png" width="360" alt="screenshot">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+*Brick breaker game build in [React](https://reactjs.org/).*
+**Supports gestures, keyboard and even gamepad**
 
 ## Available Scripts
 
@@ -31,5 +32,3 @@ Adds android platform for cordova
 ### `npm run build:android`
 
 Build .apk for android
-
-**Supports keyboard, gestures and also x-box gamepad**
