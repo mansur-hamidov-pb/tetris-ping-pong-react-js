@@ -1,4 +1,5 @@
 <img src="https://user-images.githubusercontent.com/56827695/134165368-d78d8792-5c6b-48cb-a2d6-be52444df62b.png" width="360" alt="screenshot">
+<img src="https://user-images.githubusercontent.com/34154535/142383511-d887739d-1c13-4a57-bac0-ef9df7865658.gif" width="360" alt="capture">
 
 # Brick breaker game written in [React](https://reactjs.org/).
 **Supports gestures, keyboard and even gamepad**
@@ -32,3 +33,8 @@ Adds android platform for cordova
 ### `npm run build:android`
 
 Build .apk for android
+
+## Game control
+* Keyboard (SPACE - play/pause, LEFT & RIGHT ARROWS for moving racket)
+* Gestures (TAP - play/pause, SWIPE LEFT & RIGHT for moving racket)
+* X-Box Gamepad
